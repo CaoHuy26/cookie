@@ -1,0 +1,12 @@
+<h1>View item</h1>
+
+<ul>
+    <% items.forEach(function(user){ %>
+        <li>
+            <h3>Name: <%= user.name %></h3>
+            <p>Id: <%= user.id %></p>
+            <p>Description: <%= user.description %></p>
+            <p>Price: <%= user.price %></p>
+        </li>
+    <% }) %>
+</ul>

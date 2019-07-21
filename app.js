@@ -14,18 +14,26 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-    res.status(200).render('index.ejs');
+    fs.readFile('./data.json', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        const items = JSON.parse(data);
+        res.status(200).render('index.ejs', {
+            items: items
+        });
+    });
 });
 
 app.get('/admin', (req, res) => {
-    res.status(200).render('admin/admin.ejs');    
+    res.status(200).render('users/admin.ejs');    
 });
 
-app.get('/admin/create', (req, res) => {
-    res.status(200).render('admin/create.ejs');    
+app.get('/create-item', (req, res) => {
+    res.status(200).render('items/create-item.ejs');    
 });
 
-app.post('/admin/create', (req, res) => {
+app.post('/create-item', (req, res) => {
     fs.readFile('./data.json', (err, data) => {
         if (err) {
             throw err;
@@ -36,7 +44,7 @@ app.post('/admin/create', (req, res) => {
             description: req.body.description,
             price: req.body.price,
             image: req.body.image,
-            createAt: new Date().toLocaleString,
+            createAt: new Date(),
         };
         console.log(newItem);
         const items = JSON.parse(data);
@@ -46,10 +54,22 @@ app.post('/admin/create', (req, res) => {
             if (err) {
                 throw err;
             }
-            res.status(200).send('Created item');
+            res.status(200).redirect('/');
         }) 
     });
 });
+
+app.get('/view-item', (req, res) => {
+    fs.readFile('./data.json', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        const items = JSON.parse(data);
+        res.status(200).render('items/view-item', {items: items});
+    });
+});
+
+// Xem item bằng id
 
 app.listen(3000, (err) => {
     if (err) {

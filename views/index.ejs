@@ -1,63 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="shortcut icon" type="image/png" href="img//cookie.png"/>
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <% include layouts/link %>
     
+    <link rel="stylesheet" href="css/index.css">
     <title>Cookie</title>
 </head>
 
-<% include layouts/header%>
+<% include layouts/header %>
 
 <body>
     <div class="content container mt-4">
         <h3 class="text-center">Content</h3>
-
+        <!-- Item -->
         <div class="row justify-content-center">
+        <% items.forEach(function(item){ %>
             <div class="card col-md-3 m-2 item">
                 <img class="car-img-top" src="https://via.placeholder.com/100" alt="">
                 <div class="card-body">
-                    <h4 class="card-title">Title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title"><%= item.name%></h4>
+                    <p class="card-text"><%= item.description%></p>
+                    <p class="card-text"><%= item.price%></p>
                     <button type="button" class="btn btn-primary btn-md">More...</button>
                 </div>
             </div>
-
-            <div class="card col-md-3 m-2 item">
-                <img class="car-img-top" src="https://via.placeholder.com/100" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-primary btn-md">More...</button>
-                </div>
-            </div>
-
-            <div class="card col-md-3 m-2 item">
-                <img class="car-img-top" src="https://via.placeholder.com/100" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-primary btn-md">More...</button>
-                </div>
-            </div>
-
-            <div class="card col-md-3 m-2 item">
-                <img class="car-img-top" src="https://via.placeholder.com/100" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-primary btn-md">More...</button>
-                </div>
-            </div>
+        <% }) %>
         </div>
-        <!-- End div item -->
+        <!-- End Item -->
     </div>
 </body>
 
-<% include layouts/footer%>
+<% include layouts/footer %>
 
 </html>
