@@ -1,0 +1,42 @@
+<h1>View item</h1>
+
+<ul>
+    <% items.forEach(function(item){ %>
+        <li>
+            <a href="/item/<%= item.id %>">Xem</a>
+            <a href="">Sửa</a>
+            <!-- <a id="delete-item" data-id="<%= item.id %>">Xóa</a> -->
+            <a href="/item/delete/<%= item.id %>">Xóa</a>
+
+            <h3>Name: <%= item.name %></h3>
+            <p>Id: <%= item.id %></p>
+            <p>Description: <%= item.description %></p>
+            <p>Price: <%= item.price %></p>
+        </li>
+    <% }) %>
+</ul>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('#delete-item').on('click', (e) => {
+            e.preventDefault();
+            // const pathname = window.location.pathname;
+            // const idItem = pathname.split('/')[pathname.split('/').length - 1];
+            $target = $(e.target);
+            const idItem = $target.attr('data-id');
+            $.ajax({
+                url: `/item/${idItem}`,
+                type: 'DELETE',
+                success: () => {
+                    console.log('Deleted');
+                    window.location.href = '/';
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+            console.log(idItem);
+        });
+    });
+</script> -->
