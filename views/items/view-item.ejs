@@ -1,27 +1,42 @@
-<h1>View item by Id</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../layouts/link %>
+    <title>Admin</title>
+</head>
 
-<h3>Name: <%= item.name %></h3>
-<p>Id: <%= item.id %></p>
-<p>Description: <%= item.description %></p>
-<p>Price: <%= item.price %></p>
+<% include ../layouts/header %>
 
-<h3>Update</h3>
-<form action="" method="post">
-    <span>Name</span>
-    <input type="text" name="name" value="<%= item.name %>" >
-    <br>
-    <span>Id</span>
-    <input type="text" name="id" value="<%= item.id %>" >
-    <br>
-    <span>Description</span>
-    <textarea name="description" id="" cols="50" rows="3"><%= item.description %></textarea>
-    <br>
-    <span>Price</span>
-    <input type="text" name="price" value="<%= item.price %>">
-    <br>
-    <span>Image</span>
-    <input type="text" name="image" value="<%= item.image %>">
+<body>
+    <h1>View item by Id</h1>
 
-    <br>
-    <button>Update</button>
-</form>
+    <h3>Name: <%= item.name %></h3>
+    <p>Id: <%= item.id %></p>
+    <p>Description: <%= item.description %></p>
+    <p>Price: <%= item.price %></p>
+    
+    <h3>Update</h3>
+    <form action="" method="post">
+        <span>Name</span>
+        <input type="text" name="name" value="<%= item.name %>" >
+        <br>
+        <span>Id</span>
+        <input type="text" name="id" value="<%= item.id %>" >
+        <br>
+        <span>Description</span>
+        <textarea name="description" id="" cols="50" rows="3"><%= item.description %></textarea>
+        <br>
+        <span>Price</span>
+        <input type="text" name="price" value="<%= item.price %>">
+        <br>
+        <span>Image</span>
+        <input type="text" name="image" value="<%= item.image %>">
+    
+        <br>
+        <button>Update</button>
+    </form> 
+</body>
+
+</html>
+
+

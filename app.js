@@ -112,6 +112,14 @@ app.delete('/item/:id', (req, res) => {
 });
 
 
+app.get('/login', (req, res) => {
+    res.status(200).render('users/login.ejs');
+});
+
+app.get('/signup', (req, res) => {
+    res.status(200).render('users/signup.ejs');
+});
+
 app.listen(3000, (err) => {
     if (err) {
         throw err;

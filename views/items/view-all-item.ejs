@@ -1,6 +1,16 @@
-<h1>View item</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../layouts/link %>
+    <title>Admin</title>
+</head>
 
-<ul>
+<% include ../layouts/header %>
+
+<body>
+    <h1>View item</h1>
+
+    <ul>
     <% items.forEach(function(item){ %>
         <li>
             <a href="/item/<%= item.id %>">Xem</a>
@@ -15,4 +25,8 @@
             <p>Price: <%= item.price %></p>
         </li>
     <% }) %>
-</ul>
+    </ul>
+</body>
+
+</html>
+
