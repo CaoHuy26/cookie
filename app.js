@@ -2,6 +2,8 @@ const express = require('express');
 // For generate ID
 const uniqid = require('uniqid');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
 const fs = require('fs');
 
 const app = express();
@@ -12,6 +14,7 @@ app.set('views', './views')
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
     fs.readFile('./data.json', (err, data) => {
@@ -86,8 +89,7 @@ app.get('/item/:id', (req, res) => {
     });
 });
 
-// Must be delete by app.delete
-app.get('/item/delete/:id', (req, res) => {
+app.delete('/item/:id', (req, res) => {
     const id = req.params.id;
     fs.readFile('./data.json', (err, data) => {
         if (err) {
@@ -101,7 +103,7 @@ app.get('/item/delete/:id', (req, res) => {
                     if (err) {
                         throw err;
                     }
-                    res.status(200).send('Deleted')
+                    res.status(200).redirect('/');
                     return;
                 });
             }
