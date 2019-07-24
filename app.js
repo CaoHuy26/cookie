@@ -1,128 +1,90 @@
 const express = require('express');
-// For generate ID
-const uniqid = require('uniqid');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-const fs = require('fs');
+const mongoose = require('mongoose');
+const Item = require('./model');
 
-const app = express();
+mongoose.connect('mongodb://localhost:27017/cookie', (err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('Connect to Mongodb success');
 
-app.set('view engine', 'ejs');
-app.set('views', './views')
+    const app = express();
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(methodOverride('_method'));
+    app.set('view engine', 'ejs');
+    app.set('views', './views')
 
-app.get('/', (req, res) => {
-    fs.readFile('./data.json', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        const items = JSON.parse(data);
-        res.status(200).render('index.ejs', {
-            items: items
+    app.use(express.static('public'));
+    app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.json())
+    app.use(methodOverride('_method'));
+
+    app.get('/', (req, res) => {
+        Item.find({}).then((items) => {
+            res.status(200).render('index', { items: items });
         });
     });
-});
 
-app.get('/admin', (req, res) => {
-    res.status(200).render('users/admin.ejs');
-});
+    app.get('/admin', (req, res) => {
+        res.status(200).render('users/admin.ejs');
+    });
 
-app.get('/create-item', (req, res) => {
-    res.status(200).render('items/create-item.ejs');
-});
+    app.get('/create-item', (req, res) => {
+        res.status(200).render('items/create-item.ejs');
+    });
 
-app.post('/create-item', (req, res) => {
-    fs.readFile('./data.json', (err, data) => {
-        if (err) {
-            throw err;
-        }
+    app.post('/create-item', async (req, res) => {
         const newItem = {
-            id: uniqid(),
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
             image: req.body.image,
-            createAt: new Date(),
         };
-        console.log(newItem);
-        const items = JSON.parse(data);
-        items.push(newItem);
+        
+        const result = await Item.create(newItem);
+        console.log(result);
+        res.status(200).redirect('/');
+    });
 
-        fs.writeFile('./data.json', JSON.stringify(items), (err) => {
-            if (err) {
-                throw err;
-            }
+    app.get('/item', (req, res) => {
+        Item.find({}).then((items) => {
+            res.status(200).render('items/view-all-item', { items: items });
+        });
+    });
+
+    app.get('/item/:id', (req, res) => {
+        const id = req.params.id;
+        Item.findById(id).then((item) => {
+            res.status(200).render('items/view-item', { item: item });
+        });
+    });
+
+    app.delete('/item/:id', (req, res) => {
+        const id = req.params.id;
+
+        Item.deleteOne({_id: id}).then(() => {
+            console.log(`Delete ${id} success!!`);
             res.status(200).redirect('/');
-        })
+        });
     });
-});
 
-app.get('/item', (req, res) => {
-    fs.readFile('./data.json', (err, data) => {
+
+    app.get('/login', (req, res) => {
+        res.status(200).render('users/login.ejs');
+    });
+
+    app.get('/signup', (req, res) => {
+        res.status(200).render('users/signup.ejs');
+    });
+
+    app.listen(3000, (err) => {
         if (err) {
             throw err;
         }
-        const items = JSON.parse(data);
-        res.status(200).render('items/view-all-item', { items: items });
+        console.log('Sever listening on port 3000....');
     });
+
 });
 
-app.get('/item/:id', (req, res) => {
-    const q = req.params.id;
-    fs.readFile('./data.json', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        const items = JSON.parse(data);
-        for (let item of items) {
-            if (item.id === q) {
-                res.status(200).render('items/view-item', { item: item });
-                return;
-            }
-        }
-        res.status(404).send('Not Found');
-    });
-});
-
-app.delete('/item/:id', (req, res) => {
-    const id = req.params.id;
-    fs.readFile('./data.json', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        const items = JSON.parse(data);
-        for (let item of items) {
-            if (item.id === id) {
-                items.splice(items.indexOf(item), 1);
-                fs.writeFile('./data.json', JSON.stringify(items), (err) => {
-                    if (err) {
-                        throw err;
-                    }
-                    res.status(200).redirect('/');
-                    return;
-                });
-            }
-        }
-    });
-});
-
-
-app.get('/login', (req, res) => {
-    res.status(200).render('users/login.ejs');
-});
-
-app.get('/signup', (req, res) => {
-    res.status(200).render('users/signup.ejs');
-});
-
-app.listen(3000, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Sever listening on port 3000....');
-});
