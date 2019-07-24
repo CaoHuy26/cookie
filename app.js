@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 const mongoose = require('mongoose');
-const Item = require('./model');
+const Item = require('./models/item.model');
 
 mongoose.connect('mongodb://localhost:27017/cookie', (err) => {
     if (err) {
@@ -42,7 +42,7 @@ mongoose.connect('mongodb://localhost:27017/cookie', (err) => {
             price: req.body.price,
             image: req.body.image,
         };
-        
+
         const result = await Item.create(newItem);
         console.log(result);
         res.status(200).redirect('/');
