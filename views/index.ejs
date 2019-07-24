@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include layouts/link %>
-    
+
     <title>Cookie</title>
 </head>
 
@@ -11,11 +12,12 @@
 <body>
     <div class="content container mt-4">
         <h3 class="text-center">Content</h3>
+
         <!-- Item -->
         <div class="row justify-content-center">
-        <% items.forEach(function(item){ %>
+            <% items.forEach(function(item){ %>
             <div class="card col-md-3 m-2 item">
-                <img class="car-img-top" src="https://via.placeholder.com/100" alt="">
+                <img class="img-top" src="https://via.placeholder.com/100" alt="">
                 <div class="card-body">
                     <h4 class="card-title"><%= item.name%></h4>
                     <p class="card-text"><%= item.description%></p>
@@ -23,9 +25,30 @@
                     <button type="button" class="btn btn-primary btn-md">More...</button>
                 </div>
             </div>
-        <% }) %>
+            <% }) %>
         </div>
         <!-- End Item -->
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center m-3">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <% for(let i = 1; i <= Math.ceil(length / perPage); i++) { %>
+                <li class="page-item"><a class="page-link" href="/?page=<%= i %>"><%= i %></a></li>
+                <% } %>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Pagination -->
+
     </div>
 </body>
 

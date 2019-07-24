@@ -5,7 +5,7 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const Item = require('./models/item.model');
 
-mongoose.connect('mongodb://localhost:27017/cookie', (err) => {
+mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, (err) => {
     if (err) {
         throw err;
     }
@@ -22,8 +22,16 @@ mongoose.connect('mongodb://localhost:27017/cookie', (err) => {
     app.use(methodOverride('_method'));
 
     app.get('/', (req, res) => {
+        const page = parseInt(req.query.page) || 1;
+        const perPage = 7;
+        const start = (page - 1) * perPage;
+        const end = page * perPage;
+
         Item.find({}).then((items) => {
-            res.status(200).render('index', { items: items });
+            res.status(200).render('index',
+                { items: items.slice(start, end), 
+                length: items.length,
+                perPage: perPage});
         });
     });
 
