@@ -8,7 +8,7 @@
             padding-left: 15px;
         }
     </style>
-    
+
     <title>Đăng ký</title>
 </head>
 
@@ -22,22 +22,30 @@
                 <h4>Đăng ký</h4>
             </div>
 
+            <% if (errMessages.length > 0) { %>
+            <div class="message">
+                <% for (err of errMessages) { %>
+                <p class="alert alert-danger"><%= err %></p>
+                <% } %>
+            </div>
+            <% } %>
+
             <div class="form-group">
                 <p>Tên đăng nhập</p>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="username">
+                    <input type="text" class="form-control" name="username" value="<%= values.username %>">
                 </div>
             </div>
             <div class="form-group">
                 <p>Mật khẩu</p>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password" value="<%= values.password %>">
                 </div>
             </div>
             <div class="form-group">
                 <p>Nhập lại mật khẩu</p>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control">
+                    <input type="password" class="form-control" name="re_password">
                 </div>
             </div>
 

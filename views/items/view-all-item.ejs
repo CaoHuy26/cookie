@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ../layouts/link %>
     <title>Admin</title>
@@ -8,25 +9,69 @@
 <% include ../layouts/header %>
 
 <body>
-    <h1>View item</h1>
+    <div class="container mt-4">
 
-    <ul>
-    <% items.forEach(function(item){ %>
-        <li>
-            <a href="/item/<%= item.id %>">Xem</a>
-            <a href="">Sửa</a>
-            <form method="POST" action="/item/<%= item.id %>?_method=DELETE">
-                <button type="submit">Xóa</button>
-            </form>
+        <h1>View item</h1>
 
-            <h3>Name: <%= item.name %></h3>
-            <p>Id: <%= item.id %></p>
-            <p>Description: <%= item.description %></p>
-            <p>Price: <%= item.price %></p>
-        </li>
-    <% }) %>
-    </ul>
+        <!-- List item -->
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Giá tiền</th>
+                    <th>Mô tả</th>
+                    <th>...</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.forEach(function(item){ %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><a href="/item/<%= item.id %>" title="Xem"><%= item.name %></a></td>
+                    <td><%= item.price %></td>
+                    <td><%= item.description %></td>
+                    <td>
+                        <!-- Button to show POPUP -->
+                        <button type="button" class="btn" data-toggle="modal" data-target="#popup-confirm-delete">
+                            <img id="icon-trash" src="img/icon/trash.svg" alt="Xóa" title="Xóa">
+                        </button>
+                        <!-- POPUP -->
+                        <!-- Lỗi không xóa được đúng cái chọn
+                        Nếu xóa class đi thì hết lỗi -->
+                        <div class="modal fade" id="popup-confirm-delete">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Thông báo</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="bg-danger text-white">Lỗi: Không xóa đúng được id cần xóa</p>
+                                        Đồng ý xóa: <strong><%= item.id %></strong>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
+                                            bỏ</button>
+                                        <!-- METHOD DELETE -->
+                                        <form method="POST" action="/item/<%= item.id %>?_method=DELETE">
+                                            <button type="submit" class="btn btn-info">Xác nhận</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End POPUP -->
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <!-- End list item -->
+    </div>
+
 </body>
 
 </html>
-

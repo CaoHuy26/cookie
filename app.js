@@ -4,6 +4,9 @@ const methodOverride = require('method-override');
 
 const mongoose = require('mongoose');
 const Item = require('./models/item.model');
+const User = require('./models/user.model');
+
+const validate = require('./validate/user.validate');
 
 mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, (err) => {
     if (err) {
@@ -29,9 +32,11 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
 
         Item.find({}).then((items) => {
             res.status(200).render('index',
-                { items: items.slice(start, end), 
-                length: items.length,
-                perPage: perPage});
+                {
+                    items: items.slice(start, end),
+                    length: items.length,
+                    perPage: perPage
+                });
         });
     });
 
@@ -72,7 +77,7 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
     app.delete('/item/:id', (req, res) => {
         const id = req.params.id;
 
-        Item.deleteOne({_id: id}).then(() => {
+        Item.deleteOne({ _id: id }).then(() => {
             console.log(`Delete ${id} success!!`);
             res.status(200).redirect('/');
         });
@@ -83,8 +88,40 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
         res.status(200).render('users/login.ejs');
     });
 
+    app.post('/login', (req, res) => {
+        const { username, password } = req.body;
+        User.findOne({username: username}).then((user) => {
+            if (!user) {
+                res.send(`Tài khoản ${username} không tồn tại`);
+            }
+            else {
+                if (password != user.password) {
+                    res.send('Sai mật khẩu');
+                }
+                else {
+                    res.send('Đăng nhập thành công');
+                }
+            }
+        });
+    });
+
     app.get('/signup', (req, res) => {
-        res.status(200).render('users/signup.ejs');
+        const errMessages = [];
+        const values = {
+            username: '',
+            password: '',
+        };
+        res.status(200).render('users/signup.ejs', { errMessages: errMessages, values: values });
+    });
+
+    app.post('/signup', validate.postCreateUser, (req, res) => {
+        const newUser = {
+            username: req.body.username,
+            password: req.body.password
+        };
+        console.log(newUser);
+        User.create(newUser);
+        res.status(200).redirect('/');
     });
 
     app.listen(3000, (err) => {
@@ -93,6 +130,5 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
         }
         console.log('Sever listening on port 3000....');
     });
-
 });
 

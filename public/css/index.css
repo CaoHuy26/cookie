@@ -28,3 +28,9 @@ footer {
     border-radius: 20px;
     background-color: #fcfbfd
 }
+
+/* Icon */
+#icon-trash {
+    width: 20px;
+    height: 20px;
+}
