@@ -3,6 +3,7 @@
 
 <head>
     <% include layouts/link %>
+    <link rel="stylesheet" href="css/index.card.css">
 
     <title>Cookie</title>
 </head>
@@ -10,24 +11,61 @@
 <% include layouts/header %>
 
 <body>
-    <div class="content container mt-4">
-        <h3 class="text-center">Content</h3>
-
-        <!-- Item -->
-        <div class="row justify-content-center">
-            <% items.forEach(function(item){ %>
-            <div class="card col-md-3 m-2 item">
-                <img class="img-top" src="https://via.placeholder.com/100" alt="">
-                <div class="card-body">
-                    <h4 class="card-title"><%= item.name%></h4>
-                    <p class="card-text"><%= item.description%></p>
-                    <p class="card-text"><%= item.price%></p>
-                    <button type="button" class="btn btn-primary btn-md">More...</button>
+    <div>
+        
+    </div>
+    <div class="container">
+        <div style="margin-top: 50px">
+            <!-- Item -->
+            <div class="row justify-content-center">
+                <% items.forEach(function(item){ %>
+                <div class="col-md-3 m-2">
+                    <div class="card">
+                        <!-- Image Uploaded -->
+                        <div class="img-card">
+                            <img
+                                src="https://instagram.fhan2-4.fna.fbcdn.net/vp/4225c59017157fb5fdc42d55f3a4a100/5DE80BAA/t51.2885-15/sh0.08/e35/s640x640/66314421_2074173449558776_4516846865511006918_n.jpg?_nc_ht=instagram.fhan2-4.fna.fbcdn.net&_nc_cat=104 640w,https://instagram.fhan2-4.fna.fbcdn.net/vp/6e84a26571b44ccfd40ed722c1f0efe2/5DB6016E/t51.2885-15/sh0.08/e35/s750x750/66314421_2074173449558776_4516846865511006918_n.jpg?_nc_ht=instagram.fhan2-4.fna.fbcdn.net&_nc_cat=104 750w,https://instagram.fhan2-4.fna.fbcdn.net/vp/c96049e273a0a956564ce828bc0c6466/5DE7C26E/t51.2885-15/e35/s1080x1080/66314421_2074173449558776_4516846865511006918_n.jpg?_nc_ht=instagram.fhan2-4.fna.fbcdn.net&_nc_cat=104 1080w" />
+                        </div>
+                        <!-- User info -->
+                        <div class="card-content">
+                            <div class="user-info mb-3">
+                                <div class="row">
+                                    <!-- Avatar -->
+                                    <div class="col-md-3">
+                                        <img class="user-avatar" src="img/icon/user.png" alt="">
+                                    </div>
+                                    <!-- Name & Date -->
+                                    <div class="col-md-6 pl-3">
+                                        <p class="user-username"><%= item.name %></p>
+                                        <span class="user-date-upload">22-12-2018</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Status -->
+                            <div class="user-status">
+                                <p>Đặt tối đa 80 ký tự ...</p>
+                                <p>3 dòng ...</p>
+                                <p>...</p>
+                            </div>
+                        </div>
+                        <!-- Action -->
+                        <div class="card-action">
+                            <!-- Like -->
+                            <button type="button" class="btn">
+                                <img class="m-1" src="img/icon/heart.png" alt="" title="Thích">
+                            </button>
+                            <!-- Comment -->
+                            <button type="button" class="btn">
+                                <img class="m-1" src="img/icon/comment.png" alt="" title="Bình luận">
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                <% }) %>
             </div>
-            <% }) %>
+            <!-- End Item -->
         </div>
-        <!-- End Item -->
+
 
         <!-- Pagination -->
         <div class="d-flex justify-content-center m-3">

@@ -1,30 +1,72 @@
+<style>
+    nav {
+        margin: 10px 0px 20px 0px;
+    }
+
+    .logo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .input-group {
+        width: 300px;
+    }
+
+    .btn-search {
+        padding: 0px;
+        margin-left: 2px;
+    }
+</style>
+
 <header class="container">
-    <div class="text-center">
+    <nav class="text-center">
         <h1>Cookie</h1>
-        <a href="/"><img id="logo" src="img/cookie.png" alt="Trang chủ"></a> 
-    </div>
-    
+        <a href="/"><img id="cookie" src="img/cookie.png" alt="Trang chủ"></a>
+    </nav>
+
     <div class="row mt-2 bg-light">
-        <div class="col-md-8">
+        <div class="col-md-3">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Trang chủ</a>
+                    <a class="nav-link" href="/">
+                        <img class="logo logo-home" src="img/cookie.png" alt="Trang chủ" title="Trang chủ">
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Trang chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin</a>
-                </li>
+
             </ul>
         </div>
-        <div class="col-md-4">
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <div class="mt-2 d-flex justify-content-center">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm">
+                        <div class="input-group-append">
+                            <button class="btn btn-search" type="button">
+                                <img class="logo logo-search" src="img/icon/search.png" alt="Tìm kiếm" title="Tìm kiếm">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Đăng nhập</a>
+                    <a class="nav-link" href="/login">
+                        <img class="logo logo-login" src="img/icon/user.png" alt="Đăng nhập" title="Đăng nhập">
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/signup">Đăng ký</a>
+                    <a class="nav-link" href="/signup">
+                        <img class="logo logo-signup" src="img/icon/jake.png" alt="Đăng ký" title="Đăng ký">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">
+                        <img class="logo logo-admin" src="img/icon/finn.png" alt="Admin" title="Admin">
+                    </a>
                 </li>
             </ul>
         </div>
