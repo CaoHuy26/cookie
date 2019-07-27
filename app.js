@@ -2,9 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
+const fs = require('fs');
+
 const mongoose = require('mongoose');
 const Item = require('./models/item.model');
 const User = require('./models/user.model');
+
+const multer  = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/uploads');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now());
+    }
+});
+const upload = multer({storage: storage});
 
 const validate = require('./validate/user.validate');
 
@@ -48,14 +61,20 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
         res.status(200).render('items/create-item.ejs');
     });
 
-    app.post('/create-item', async (req, res) => {
+    app.post('/create-item', upload.single('image'), async (req, res) => {
+        console.log(req.file);
+        // const imgPath = `public\\${req.file.path.split('\\').slice(1).join('\\')}`
+        console.log(imgPath);
         const newItem = {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            image: req.body.image,
+            image: { 
+                data: fs.readFileSync(req.file.path), 
+                contentType: 'image/png',
+            }
         };
-
+        
         const result = await Item.create(newItem);
         console.log(result);
         res.status(200).redirect('/');

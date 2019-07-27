@@ -21,6 +21,7 @@
                     <th>Tên</th>
                     <th>Giá tiền</th>
                     <th>Mô tả</th>
+                    <th>Ảnh</th>
                     <th>...</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                     <td><a href="/item/<%= item.id %>" title="Xem"><%= item.name %></a></td>
                     <td><%= item.price %></td>
                     <td><%= item.description %></td>
+                    <td><img class="logo" src="<%= item.image %>" alt=""></td>
                     <td>
                         <!-- Button to show POPUP -->
                         <button type="button" class="btn" data-toggle="modal" data-target="#popup-confirm-delete">
