@@ -10,8 +10,7 @@
 
 <body>
     <div class="container mt-4">
-
-        <h1>View item</h1>
+        <h1>View images</h1>
 
         <!-- List item -->
         <table class="table table-hover">
@@ -26,17 +25,17 @@
                 </tr>
             </thead>
             <tbody>
-                <% items.forEach(function(item){ %>
+                <% images.forEach(function(image){ %>
                 <tr>
-                    <td><%= item.id %></td>
-                    <td><a href="/item/<%= item.id %>" title="Xem"><%= item.name %></a></td>
-                    <td><%= item.price %></td>
-                    <td><%= item.description %></td>
-                    <td><img class="logo" src="<%= item.image %>" alt=""></td>
+                    <td><%= image.id %></td>
+                    <td><a href="/image/<%= image.id %>" title="Xem"><%= image.name %></a></td>
+                    <td><%= image.price %></td>
+                    <td><%= image.description %></td>
+                    <td><img class="logo" src="<%= image.image %>" alt=""></td>
                     <td>
                         <!-- Button to show POPUP -->
                         <button type="button" class="btn" data-toggle="modal" data-target="#popup-confirm-delete">
-                            <img id="icon-trash" src="img/icon/trash.svg" alt="Xóa" title="Xóa">
+                            <img id="icon-trash" src="../../img/icon/trash.svg" alt="Xóa" title="Xóa">
                         </button>
                         <!-- POPUP -->
                         <!-- Lỗi không xóa được đúng cái chọn
@@ -52,13 +51,13 @@
                                     </div>
                                     <div class="modal-body">
                                         <p class="bg-danger text-white">Lỗi: Không xóa đúng được id cần xóa</p>
-                                        Đồng ý xóa: <strong><%= item.id %></strong>
+                                        Đồng ý xóa: <strong><%= image.id %></strong>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
                                             bỏ</button>
                                         <!-- METHOD DELETE -->
-                                        <form method="POST" action="/item/<%= item.id %>?_method=DELETE">
+                                        <form method="POST" action="/image/<%= image.id %>?_method=DELETE">
                                             <button type="submit" class="btn btn-info">Xác nhận</button>
                                         </form>
                                     </div>

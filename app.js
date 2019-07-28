@@ -2,24 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-const fs = require('fs');
-
+// Database
 const mongoose = require('mongoose');
-const Item = require('./models/item.model');
-const User = require('./models/user.model');
 
-const multer  = require('multer')
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './public/uploads');
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now());
-    }
-});
-const upload = multer({storage: storage});
-
-const validate = require('./validate/user.validate');
+//Route
+const adminRoute = require('./routes/admin.route');
+const authRoute = require('./routes/auth.route');
+const indexRoute = require('./routes/index.route');
 
 mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, (err) => {
     if (err) {
@@ -37,110 +26,10 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
     app.use(bodyParser.json())
     app.use(methodOverride('_method'));
 
-    app.get('/', (req, res) => {
-        const page = parseInt(req.query.page) || 1;
-        const perPage = 6;
-        const start = (page - 1) * perPage;
-        const end = page * perPage;
-
-        Item.find({}).then((items) => {
-            res.status(200).render('index',
-                {
-                    items: items.slice(start, end),
-                    length: items.length,
-                    perPage: perPage
-                });
-        });
-    });
-
-    app.get('/admin', (req, res) => {
-        res.status(200).render('users/admin.ejs');
-    });
-
-    app.get('/create-item', (req, res) => {
-        res.status(200).render('items/create-item.ejs');
-    });
-
-    app.post('/create-item', upload.single('image'), async (req, res) => {
-        console.log(req.file);
-        // const imgPath = `public\\${req.file.path.split('\\').slice(1).join('\\')}`
-        console.log(imgPath);
-        const newItem = {
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-            image: { 
-                data: fs.readFileSync(req.file.path), 
-                contentType: 'image/png',
-            }
-        };
-        
-        const result = await Item.create(newItem);
-        console.log(result);
-        res.status(200).redirect('/');
-    });
-
-    app.get('/item', (req, res) => {
-        Item.find({}).then((items) => {
-            res.status(200).render('items/view-all-item', { items: items });
-        });
-    });
-
-    app.get('/item/:id', (req, res) => {
-        const id = req.params.id;
-        Item.findById(id).then((item) => {
-            res.status(200).render('items/view-item', { item: item });
-        });
-    });
-
-    app.delete('/item/:id', (req, res) => {
-        const id = req.params.id;
-
-        Item.deleteOne({ _id: id }).then(() => {
-            console.log(`Delete ${id} success!!`);
-            res.status(200).redirect('/');
-        });
-    });
-
-    app.get('/login', (req, res) => {
-        res.status(200).render('users/login.ejs');
-    });
-
-    app.post('/login', (req, res) => {
-        const { username, password } = req.body;
-        User.findOne({username: username}).then((user) => {
-            if (!user) {
-                res.send(`Tài khoản ${username} không tồn tại`);
-            }
-            else {
-                if (password != user.password) {
-                    res.send('Sai mật khẩu');
-                }
-                else {
-                    res.send('Đăng nhập thành công');
-                }
-            }
-        });
-    });
-
-    app.get('/signup', (req, res) => {
-        const errMessages = [];
-        const values = {
-            username: '',
-            password: '',
-        };
-        res.status(200).render('users/signup.ejs', { errMessages: errMessages, values: values });
-    });
-
-    app.post('/signup', validate.postCreateUser, (req, res) => {
-        const newUser = {
-            username: req.body.username,
-            password: req.body.password
-        };
-        console.log(newUser);
-        User.create(newUser);
-        res.status(200).redirect('/');
-    });
+    // Route
+    app.use('/', indexRoute);
+    app.use('/admin', adminRoute);
+    app.use('/', authRoute);
 
     app.listen(3000, (err) => {
         if (err) {

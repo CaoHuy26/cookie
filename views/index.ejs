@@ -18,14 +18,12 @@
         <div style="margin-top: 50px">
             <!-- Item -->
             <div class="row justify-content-center">
-                <% items.forEach(function(item){ %>
+                <% Array.from(images).forEach(function(image){ %>
                 <div class="col-md-3 m-2">
                     <div class="card">
                         <!-- Image Uploaded -->
                         <div class="img-card">
-                            <img
-                                src="https://instagram.fhan2-4.fna.fbcdn.net/vp/4225c59017157fb5fdc42d55f3a4a100/5DE80BAA/t51.2885-15/sh0.08/e35/s640x640/66314421_2074173449558776_4516846865511006918_n.jpg?_nc_ht=instagram.fhan2-4.fna.fbcdn.net&_nc_cat=104 640w,https://instagram.fhan2-4.fna.fbcdn.net/vp/6e84a26571b44ccfd40ed722c1f0efe2/5DB6016E/t51.2885-15/sh0.08/e35/s750x750/66314421_2074173449558776_4516846865511006918_n.jpg?_nc_ht=instagram.fhan2-4.fna.fbcdn.net&_nc_cat=104 750w,https://instagram.fhan2-4.fna.fbcdn.net/vp/c96049e273a0a956564ce828bc0c6466/5DE7C26E/t51.2885-15/e35/s1080x1080/66314421_2074173449558776_4516846865511006918_n.jpg?_nc_ht=instagram.fhan2-4.fna.fbcdn.net&_nc_cat=104 1080w" />
-                            <p><%= item.image.data%></p>
+                            <img src="<%= image.imageContent %>" alt="">
                         </div>
                         <!-- User info -->
                         <div class="card-content">
@@ -37,8 +35,8 @@
                                     </div>
                                     <!-- Name & Date -->
                                     <div class="col-md-6 pl-3">
-                                        <p class="user-username"><%= item.name %></p>
-                                        <span class="user-date-upload">22-12-2018</span>
+                                        <p class="user-username"><%= image.user %></p>
+                                        <span class="user-date-upload"><%= image.dateUpload %></span>
                                     </div>
                                 </div>
                             </div>
