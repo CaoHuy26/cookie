@@ -25,3 +25,19 @@
     height: 20px;
 }
 
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.user-username {
+    color: #ffa0a0;
+    padding: 0px;
+    margin: 0px;
+}
+
+.user-date-upload {
+    font-size: 0.6em;
+    color: #d0cbcc
+}

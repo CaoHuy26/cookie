@@ -17,21 +17,19 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>User uploaded</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                    <th>Reactions</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <!-- <th>Date</th> -->
                     <th>...</th>
                 </tr>
             </thead>
             <tbody>
-                <% images.forEach(function(image){ %>
+                <% users.forEach(function(user){ %>
                 <tr>
-                    <td><%= image.id %></td>
-                    <td><a href="/admin/view/image/<%= image.id %>" title="Xem"><%= image.user %></a></td>
-                    <td><img class="logo" src="../../<%= image.imagePath %>" alt=""></td>
-                    <td><%= image.status %></td>
-                    <td><%= image.reactions %></td>
+                    <td><%= user.id %></td>
+                    <td><%= user.username %></td>
+                    <td><%= user.password %></td>
+                    <!-- <td><%= user.date %></td> -->
                     
                     <td>
                         <!-- Button to show POPUP -->
@@ -52,13 +50,13 @@
                                     </div>
                                     <div class="modal-body">
                                         <p class="bg-danger text-white">Lỗi: Không xóa đúng được id cần xóa</p>
-                                        Đồng ý xóa: <strong><%= image.id %></strong>
+                                        Đồng ý xóa: <strong><%= user.id %></strong>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
                                             bỏ</button>
                                         <!-- METHOD DELETE -->
-                                        <form method="POST" action="/admin/view/image/<%= image.id %>?_method=DELETE">
+                                        <form method="POST" action="/admin/view/user/<%= user.id %>?_method=DELETE">
                                             <button type="submit" class="btn btn-info">Xác nhận</button>
                                         </form>
                                     </div>

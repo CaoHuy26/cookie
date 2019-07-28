@@ -23,7 +23,7 @@
                     <div class="card">
                         <!-- Image Uploaded -->
                         <div class="img-card">
-                            <img src="<%= image.imageContent %>" alt="">
+                            <img src="<%= image.imagePath %>" alt="">
                         </div>
                         <!-- User info -->
                         <div class="card-content">
@@ -55,7 +55,9 @@
                             </button>
                             <!-- Comment -->
                             <button type="button" class="btn">
-                                <img class="m-1" src="img/icon/comment.png" alt="" title="Bình luận">
+                                <a href="/admin/view/image/<%= image.id %>" >
+                                    <img class="m-1" src="img/icon/comment.png" alt="" title="Bình luận">
+                                </a>
                             </button>
                         </div>
                     </div>
