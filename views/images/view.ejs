@@ -28,7 +28,7 @@
                 <% images.forEach(function(image){ %>
                 <tr>
                     <td><%= image.id %></td>
-                    <td><a href="/admin/view/image/<%= image.id %>" title="Xem"><%= image.user %></a></td>
+                    <td><a href="/image/<%= image.id %>" title="Xem"><%= image.user %></a></td>
                     <td><img class="logo" src="../../<%= image.imagePath %>" alt=""></td>
                     <td><%= image.status %></td>
                     <td><%= image.reactions %></td>
@@ -58,7 +58,7 @@
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy
                                             bỏ</button>
                                         <!-- METHOD DELETE -->
-                                        <form method="POST" action="/admin/view/image/<%= image.id %>?_method=DELETE">
+                                        <form method="POST" action="/image/<%= image.id %>?_method=DELETE">
                                             <button type="submit" class="btn btn-info">Xác nhận</button>
                                         </form>
                                     </div>
