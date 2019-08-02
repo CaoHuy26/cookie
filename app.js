@@ -58,7 +58,7 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
         }
     }, adminRoute);
     app.use('/image', imageRoute);
-    app.use('/user', userRoute);
+    app.use('/user', userRoute); 
 
     app.listen(3000, (err) => {
         if (err) {

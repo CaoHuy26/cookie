@@ -84,15 +84,20 @@
         </div>
         <!-- END CONTETN -->
 
-        <!-- UPDATE -->
-        <form method="POST" action="/image/<%= image.id %>?_method=PUT">
-            <input type="text" name="user" value="<%= image.user %>">
-            <input type="text" name="imagePath" value="<%= image.imagePath %>">
-            <input type="text" name="status" value="<%= image.status %>">
-            <input type="text" name="location" value="<%= image.location %>">
-
-            <button type="submit" class="btn btn-info">Thay đổi</button>
-        </form>
+        <!-- UPDATE IMAGE -->
+        <% if (user) { %>
+            <% if (user.username === image.user || user.isAdmin) { %>
+                <form method="POST" action="/image/<%= image.id %>?_method=PUT">
+                    <input type="file" name="imagePath" value="<%= image.imagePath %>">
+                    <input type="text" name="status" value="<%= image.status %>" placeholder="Trạng thái">
+                    <input type="text" name="location" value="<%= image.location %>" placeholder="Vị trí">
+        
+                    <button type="submit" class="btn btn-info">Thay đổi</button>
+                </form>
+            <% } %>
+        <% } %>
+        
+    
     </div>
 
 </body>

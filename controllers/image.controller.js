@@ -1,9 +1,5 @@
 const Image = require('../models/image.model');
 
-module.exports.getCreate = (req, res) => {
-    res.status(200).render('images/create.ejs');
-};
-
 module.exports.postCreate = async (req, res) => {
     // Mục đích để tránh bị lỗi không có ảnh khi submit từ form lên
     // Và để đặt ảnh mặc định khi người dùng không tải ảnh lên
@@ -14,7 +10,8 @@ module.exports.postCreate = async (req, res) => {
         // 'public\\uploads\\image-1564236194169.png' -> 'uploads\\image-1564236194169.png'
         const path = req.file.path.split('\\').slice(1).join('\\');
         const newImage = {
-            user: req.body.user,
+            user: req.session.userSession.username,
+            userId: req.session.userSession._id,
             imagePath: path,
             status: req.body.status,
             location: req.body.location,
@@ -27,7 +24,8 @@ module.exports.postCreate = async (req, res) => {
     // Nếu không có ảnh
     else {
         const newImage = {
-            user: req.body.user,
+            user: req.session.userSession.username,
+            userId: req.session.userSession._id,
             status: req.body.status,
             location: req.body.location,
         };

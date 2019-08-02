@@ -8,8 +8,6 @@ const controller = require('../controllers/image.controller');
 const multer = require('../middleware/multer')
 
 // Router
-router.get('/create', controller.getCreate);
-
 router.post('/create', multer.single('imagePath'), controller.postCreate);
 
 router.get('/:id', controller.viewImageById);

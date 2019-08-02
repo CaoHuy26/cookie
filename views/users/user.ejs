@@ -4,7 +4,7 @@
 <head>
     <% include ../layouts/link %>
 
-    <title>User</title>
+    <title><%= user.username %></title>
 </head>
 
 <% include ../layouts/header %>
@@ -12,6 +12,36 @@
 <body>
 
     <div class="container">
+        <div class="user-info text-center">
+            <img src="<%= user.avatar %>" alt="" style="width: 120px; height: 120px;">
+            <p>Username: <strong><%= user.username %></strong></p>
+            <p>Date: <strong><%= user.date %></strong></p>
+
+            <% if (user.isAdmin) { %>
+                <p><a href="/admin">Trang Admin</a></p>
+            <% } %>
+            
+            <% if (user._id === user._id) { %>
+                <p><a href="">Cập nhật thông tin cá nhân</a></p>
+            <% } else { %>
+                <p><a href="">Kết bạn</a></p>
+            <% } %>
+        </div>
+        
+        <div class="row justify-content-center">
+            <% Array.from(images).forEach(function(image){ %>
+            <div class="col-md-3 m-2" style="width: 255px; height: 255px">
+                <div class="card" >
+                    <!-- Image Uploaded -->
+                    <div class="img-card">
+                        <a href="/image/<%= image.id %>">
+                            <img src="../../../<%= image.imagePath %>" alt="" style="width: 100%; height: 100%;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
 
     </div>
 

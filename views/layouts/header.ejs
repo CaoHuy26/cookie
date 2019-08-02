@@ -65,25 +65,28 @@
                         <img class="logo logo-signup" src="../../../img/icon/jake.png" alt="Đăng ký" title="Đăng ký">
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">
-                        <img class="logo logo-admin" src="../../../img/icon/finn.png" alt="Admin" title="Admin">
-                    </a>
-                </li>
             </ul>
         </div>
+        
         <% } else { %>
         <div class="col-md-3">
             <ul class="nav justify-content-end">
-                <!-- <li class="nav-item">
-                    
-                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <img class="logo" src="/img/default/notification.png" alt="">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <img class="logo" src="/img/default/message.png" alt="">
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" style="cursor: pointer">
-                        <img class="user-avatar" src="<%= user.avatar %>" alt="" title="<%= user.username %>">
+                        <img class="logo user-avatar" src="<%= user.avatar %>" alt="" title="<%= user.username %>">
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Trang cá nhân</a>
+                        <a class="dropdown-item" href="/user/<%= user._id %>">Trang cá nhân</a>
                         <a class="dropdown-item" href="/logout">Đăng xuất</a>
                     </div>
                 </li>
