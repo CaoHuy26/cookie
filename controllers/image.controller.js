@@ -47,7 +47,7 @@ module.exports.updateImageById = (req, res) => {
 
     Image.findByIdAndUpdate({_id: id}, req.body).then(() => {
         res.status(200).json('Updated');
-    })
+    });
 };
 
 module.exports.deleteImageById = (req, res) => {

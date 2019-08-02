@@ -13,7 +13,7 @@
 
     <div class="container">
         <div class="user-info text-center">
-            <img src="<%= user.avatar %>" alt="" style="width: 120px; height: 120px;">
+            <img src="../../../../<%= user.avatar %>" alt="" style="width: 120px; height: 120px;">
             <p>Username: <strong><%= user.username %></strong></p>
             <p>Date: <strong><%= user.date %></strong></p>
 
@@ -21,9 +21,9 @@
             <% if (userSession) { %>
                 <!-- Kiểm trang người dùng hiện tại với người dùng khác -->
                 <% if (userSession._id == user._id) { %>
-                    <p><a href="">Cập nhật thông tin cá nhân</a></p>
+                    <p><a href="/user/edit">Cập nhật thông tin cá nhân</a></p>
                 <% } else { %>
-                    <p><a href="">Kết bạn</a></p>
+                    <a class="btn btn-info" href="">Kết bạn</a>
                 <% } %>
             <% } else { %>
                 <p><a href="/login">Đăng nhập để xem nhiều hơn</a></p>

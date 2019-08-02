@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../layouts/link %>
+
+</head>
+
+<% include ../layouts/header %>
+
+<body>
+    
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" action="/user/<%= userSession._id %>?_method=PUT">
+            <!-- Phải out ra vào lại mới cập nhật được avatar ở frontend
+            Vì avatar ở frontend sử dụng biến userSession để hiện thị -->
+            <input type="file" name="avatar">
+    
+            <button type="submit" class="btn btn-info">Thay đổi</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

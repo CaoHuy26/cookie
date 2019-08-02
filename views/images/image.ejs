@@ -85,8 +85,8 @@
         <!-- END CONTETN -->
 
         <!-- UPDATE IMAGE -->
-        <% if (user) { %>
-            <% if (user.username === image.user || user.isAdmin) { %>
+        <% if (userSession) { %>
+            <% if (userSession.username === image.user || userSession.isAdmin) { %>
                 <form method="POST" action="/image/<%= image.id %>?_method=PUT">
                     <input type="file" name="imagePath" value="<%= image.imagePath %>">
                     <input type="text" name="status" value="<%= image.status %>" placeholder="Trạng thái">
