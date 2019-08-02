@@ -34,7 +34,7 @@ module.exports.postLogIn = (req, res) => {
                 res.send('Sai mật khẩu');
             }
             else { 
-                req.session.user = { 
+                req.session.userSession = { 
                     _id: user._id,
                     username: user.username,
                     avatar: user.avatar,

@@ -38,7 +38,7 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
     }));
     //Session
     app.use((req, res, next) => {
-        res.locals.user = req.session.user;
+        res.locals.userSession = req.session.userSession;
         next();
     });
 
@@ -46,7 +46,7 @@ mongoose.connect('mongodb://localhost:27017/cookie', { useNewUrlParser: true }, 
     app.use('/', indexRoute);
     app.use('/', authRoute);
     app.use('/admin', (req, res, next) => {
-        const user = req.session.user;
+        const user = req.session.userSession;
         if (user) {
             if (!user.isAdmin) {
                 res.redirect('/');

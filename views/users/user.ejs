@@ -17,15 +17,17 @@
             <p>Username: <strong><%= user.username %></strong></p>
             <p>Date: <strong><%= user.date %></strong></p>
 
-            <% if (user.isAdmin) { %>
-                <p><a href="/admin">Trang Admin</a></p>
-            <% } %>
-            
-            <% if (user._id === user._id) { %>
-                <p><a href="">Cập nhật thông tin cá nhân</a></p>
+            <!-- Kiểm tra người dùng đã đăng nhập chưa -->
+            <% if (userSession) { %>
+                <!-- Kiểm trang người dùng hiện tại với người dùng khác -->
+                <% if (userSession._id == user._id) { %>
+                    <p><a href="">Cập nhật thông tin cá nhân</a></p>
+                <% } else { %>
+                    <p><a href="">Kết bạn</a></p>
+                <% } %>
             <% } else { %>
-                <p><a href="">Kết bạn</a></p>
-            <% } %>
+                <p><a href="/login">Đăng nhập để xem nhiều hơn</a></p>
+            <% } %>      
         </div>
         
         <div class="row justify-content-center">

@@ -16,9 +16,8 @@
     </div>
     <div class="container">
         <div style="margin-top: 50px">
-
             <!-- UPLOAD IMAGE -->
-            <% if (user) { %>
+            <% if (userSession) { %>
             <div id="form-create-item">
                 <form method="post" enctype="multipart/form-data" action="/image/create">
                     <div class="form-group">
@@ -62,7 +61,8 @@
                                     <!-- Name & Date -->
                                     <div class="col-md-6 pl-3">
                                         <p>
-                                            <a class="user-username" href="/user/<%= image.userId%>"><%= image.user %></a> 
+                                            <a class="user-username"
+                                                href="/user/<%= image.userId%>"><%= image.user %></a>
                                         </p>
                                         <span class="user-date-upload"><%= image.dateUpload %></span>
                                     </div>
