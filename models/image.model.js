@@ -15,10 +15,12 @@ const ImageSchema = new mongoose.Schema({
         default: 0
     },
     comments: [{
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
+        // user: {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
+        // Chưa biết dùng populate nên để tên bình thường
+        user: String,
         comment: String,
         date: {
             type: Date,

@@ -16,4 +16,6 @@ router.put('/:id', controller.updateImageById);
 
 router.delete('/:id', controller.deleteImageById);
 
+router.post('/:id/comment', controller.postComment);
+
 module.exports = router;
