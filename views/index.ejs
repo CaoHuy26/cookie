@@ -69,7 +69,7 @@
                                             <a class="user-username"
                                                 href="/user/<%= image.userId%>"><%= image.user %></a>
                                         </p>
-                                        <span class="user-date-upload"><%= image.dateUpload %></span>
+                                        <span class="user-date-upload"><%= image.dateUpload.getDate() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getFullYear() %></span>
                                     </div>
                                 </div>
                             </div>

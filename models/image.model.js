@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const ImageSchema = new mongoose.Schema({
+    // Dùng populate ở đây
+    // user: {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'User'
+    //     },
     user: String,
     userId: String,
     imagePath: String,

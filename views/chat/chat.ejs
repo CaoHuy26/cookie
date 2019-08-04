@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Demo Socketio</title>
+    <script src="../../../js/jquery-3.3.1.slim.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+</head>
+
+<body>
+
+    <form id="form-chat">
+        <h3>Hello <span id="currentUser"></span></h3>
+        <input type="text" id="message-content">
+        <input type="button" value="Send" id="btn-send-message-content">
+    </form>
+
+    <!-- Nội dung chat -->
+    <div id="chat-content">
+
+    </div>
+</body>
+
+<!-- SOCKETIO -->
+<script>
+    const socket = io('http://localhost:3000');
+    window.onload = () => {
+        // Send message
+        document.getElementById('btn-send-message-content').addEventListener('click', () => {
+            const message = document.getElementById('message-content');
+            socket.emit('send message', message.value);
+            message.value = '';
+        });
+
+        document.getElementById('form-chat').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const message = document.getElementById('message-content');
+            socket.emit('send message', message.value);
+            message.value = '';
+        });
+        // End send message
+
+        
+    };
+    socket.on('send message', (data) => {
+        $('#chat-content').append(`<p>${data.user}: ${data.content}</p>`);
+    });
+</script>
+
+</html>
